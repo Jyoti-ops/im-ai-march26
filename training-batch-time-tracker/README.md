@@ -18,6 +18,7 @@ Then open **http://localhost:3000** in your browser.
 
 - `npm run dev` – run with nodemon (recommended for development)
 - `npm start` – run with node (production)
+- `npm test` – run the test suite (unit + integration)
 
 ## Features
 
