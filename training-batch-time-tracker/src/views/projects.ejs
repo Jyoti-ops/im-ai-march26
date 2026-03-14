@@ -1,0 +1,23 @@
+<h1>Projects</h1>
+<form method="post" action="/projects" class="form-inline">
+  <label for="name">New project</label>
+  <input type="text" id="name" name="name" placeholder="Project name" required>
+  <button type="submit">Add project</button>
+</form>
+<% if (projects.length) { %>
+  <table class="table">
+    <thead>
+      <tr><th>Project</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <% projects.forEach(p => { %>
+        <tr>
+          <td><%= p.name %></td>
+          <td><a href="/projects/<%= p.id %>/tasks">Tasks</a></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p>No projects yet. Add one above.</p>
+<% } %>

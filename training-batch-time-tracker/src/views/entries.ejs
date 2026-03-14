@@ -1,0 +1,30 @@
+<h1>Time entries</h1>
+<div class="today-total">
+  <strong>Today’s total:</strong> <span id="todayTotal"><%= Math.floor(todayTotalSeconds / 3600) %>h <%= Math.floor((todayTotalSeconds % 3600) / 60) %>m</span>
+</div>
+<% if (entries.length) { %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th>Task</th>
+        <th>Started</th>
+        <th>Ended</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% entries.forEach(e => { %>
+        <tr>
+          <td><%= e.project_name %></td>
+          <td><%= e.task_name || '—' %></td>
+          <td><%= new Date(e.started_at).toLocaleString() %></td>
+          <td><%= e.ended_at ? new Date(e.ended_at).toLocaleString() : '—' %></td>
+          <td><%= e.duration_seconds != null ? (Math.floor(e.duration_seconds / 60) + 'm') : '—' %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p>No entries yet. Use the <a href="/timer">Timer</a> to log time.</p>
+<% } %>

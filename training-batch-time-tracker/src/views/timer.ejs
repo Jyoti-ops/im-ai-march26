@@ -1,0 +1,44 @@
+<h1>Timer</h1>
+<% if (current) { %>
+  <div class="timer-running">
+    <p>Running: <strong><%= current.project_name %></strong> <% if (current.task_name) { %>– <%= current.task_name %><% } %></p>
+    <p class="elapsed" data-started="<%= current.started_at %>">Elapsed: <span id="elapsed">0:00</span></p>
+    <form method="post" action="/timer/stop">
+      <button type="submit" class="btn-stop">Stop</button>
+    </form>
+  </div>
+  <div class="timer-switch">
+    <p class="switch-heading">Switch to another task</p>
+    <form method="post" action="/timer/start" class="timer-form timer-form-inline">
+      <select id="project_id" name="project_id" required>
+        <option value="">Select project</option>
+        <% projects.forEach(p => { %>
+          <option value="<%= p.id %>"><%= p.name %></option>
+        <% }); %>
+      </select>
+      <select id="task_id" name="task_id">
+        <option value="">— None —</option>
+      </select>
+      <button type="submit">Start new timer</button>
+    </form>
+  </div>
+<% } else { %>
+  <form method="post" action="/timer/start" class="timer-form">
+    <label for="project_id">Project</label>
+    <select id="project_id" name="project_id" required>
+      <option value="">Select project</option>
+      <% projects.forEach(p => { %>
+        <option value="<%= p.id %>"><%= p.name %></option>
+      <% }); %>
+    </select>
+    <label for="task_id">Task (optional)</label>
+    <select id="task_id" name="task_id">
+      <option value="">— None —</option>
+    </select>
+    <button type="submit">Start timer</button>
+  </form>
+  <p class="hint">Add projects and tasks from the <a href="/projects">Projects</a> page first.</p>
+<% } %>
+<p class="hint hint-behavior">Starting a new timer stops the current one and starts the new entry. Entries under 1 minute are not saved.</p>
+<script>window.TASKS = <%- JSON.stringify(typeof tasks !== 'undefined' ? tasks : []) %>;</script>
+<script src="/js/timer.js"></script>

@@ -1,0 +1,21 @@
+<nav class="breadcrumb"><a href="/projects">Projects</a> → <%= project.name %></nav>
+<h1>Tasks – <%= project.name %></h1>
+<form method="post" action="/projects/<%= project.id %>/tasks" class="form-inline">
+  <label for="name">New task</label>
+  <input type="text" id="name" name="name" placeholder="Task name" required>
+  <button type="submit">Add task</button>
+</form>
+<% if (tasks.length) { %>
+  <table class="table">
+    <thead>
+      <tr><th>Task</th></tr>
+    </thead>
+    <tbody>
+      <% tasks.forEach(t => { %>
+        <tr><td><%= t.name %></td></tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p>No tasks yet. Add one above.</p>
+<% } %>

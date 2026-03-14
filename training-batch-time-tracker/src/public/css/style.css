@@ -1,0 +1,160 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+  color: #1a1a1a;
+  line-height: 1.5;
+}
+.nav {
+  background: #2c3e50;
+  padding: 0.75rem 1.5rem;
+}
+.nav a {
+  color: #ecf0f1;
+  text-decoration: none;
+  margin-right: 1.25rem;
+}
+.nav a:hover {
+  text-decoration: underline;
+}
+.main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: #fff;
+  min-height: calc(100vh - 48px);
+  box-shadow: 0 0 12px rgba(0,0,0,0.06);
+}
+h1 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.dashboard-links {
+  list-style: none;
+  padding: 0;
+}
+.dashboard-links li {
+  margin-bottom: 0.5rem;
+}
+.dashboard-links a {
+  color: #2980b9;
+  text-decoration: none;
+}
+.dashboard-links a:hover {
+  text-decoration: underline;
+}
+.form-inline label,
+.form-inline input,
+.form-inline button {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.form-inline input[type="text"] {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  min-width: 200px;
+}
+.timer-form label,
+.timer-form select,
+.timer-form button {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+.timer-form select {
+  padding: 0.4rem 0.6rem;
+  min-width: 220px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+button, .btn-stop {
+  padding: 0.5rem 1rem;
+  background: #2980b9;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+button:hover, .btn-stop:hover {
+  background: #1f6dad;
+}
+.btn-stop {
+  background: #c0392b;
+}
+.btn-stop:hover {
+  background: #a93226;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.table th,
+.table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+.table th {
+  font-weight: 600;
+  background: #f8f9fa;
+}
+.breadcrumb {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+.breadcrumb a {
+  color: #2980b9;
+  text-decoration: none;
+}
+.timer-running {
+  padding: 1rem;
+  background: #e8f6f3;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.timer-running .elapsed {
+  font-size: 1.25rem;
+}
+.timer-switch {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+.timer-switch .switch-heading {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.timer-form-inline select,
+.timer-form-inline button {
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.timer-form-inline select {
+  padding: 0.4rem 0.6rem;
+  min-width: 160px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.hint-behavior {
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+}
+.today-total {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: #f0f7ff;
+  border-radius: 6px;
+}
+.hint {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
