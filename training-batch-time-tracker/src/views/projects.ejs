@@ -1,21 +1,28 @@
 <h1>Projects</h1>
-<form method="post" action="/projects" class="form-inline">
-  <label for="name">New project</label>
-  <input type="text" id="name" name="name" placeholder="Project name" required>
-  <button type="submit">Add project</button>
-</form>
-<form method="post" action="/projects/tasks" class="form-inline form-add-task">
-  <label for="task_project_id">Add task</label>
-  <select id="task_project_id" name="project_id">
-    <% projects.forEach(p => { %>
-      <option value="<%= p.id %>"<%= p.name === 'No Project' ? ' selected' : '' %>><%= p.name %></option>
-    <% }); %>
-  </select>
-  <input type="text" name="task_name" placeholder="Task name" required>
-  <button type="submit">Add task</button>
-</form>
-<p class="hint">Tasks default to &quot;No Project&quot; if you don’t change the project.</p>
+<div class="form-section">
+  <p class="form-section-title">New project</p>
+  <form method="post" action="/projects" class="form-inline">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Project name" required>
+    <button type="submit">Add project</button>
+  </form>
+</div>
+<div class="form-section">
+  <p class="form-section-title">Add task</p>
+  <form method="post" action="/projects/tasks" class="form-inline form-add-task">
+    <label for="task_project_id">Project</label>
+    <select id="task_project_id" name="project_id">
+      <% projects.forEach(p => { %>
+        <option value="<%= p.id %>"<%= p.name === 'No Project' ? ' selected' : '' %>><%= p.name %></option>
+      <% }); %>
+    </select>
+    <input type="text" name="task_name" placeholder="Task name" required>
+    <button type="submit">Add task</button>
+  </form>
+  <p class="hint">Tasks default to &quot;No Project&quot; if you don’t change the project.</p>
+</div>
 <% if (projects.length) { %>
+  <div class="table-wrap">
   <table class="table">
     <thead>
       <tr><th>Project</th><th>Actions</th></tr>
@@ -29,6 +36,7 @@
       <% }); %>
     </tbody>
   </table>
+  </div>
 <% } else { %>
-  <p>No projects yet. Add one above.</p>
+  <p class="empty-state">No projects yet. Add one above.</p>
 <% } %>

@@ -3,6 +3,7 @@
   <strong>Today’s total:</strong> <span id="todayTotal"><%= Math.floor(todayTotalSeconds / 3600) %>h <%= Math.floor((todayTotalSeconds % 3600) / 60) %>m</span>
 </div>
 <% if (entries.length) { %>
+  <div class="table-wrap">
   <table class="table">
     <thead>
       <tr>
@@ -25,6 +26,7 @@
       <% }); %>
     </tbody>
   </table>
+  </div>
 <% } else { %>
-  <p>No entries yet. Use the <a href="/timer">Timer</a> to log time.</p>
+  <p class="empty-state">No entries yet. Use the <a href="/timer">Timer</a> to log time.</p>
 <% } %>

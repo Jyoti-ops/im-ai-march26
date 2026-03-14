@@ -3,15 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= typeof title !== 'undefined' ? title : 'Training Batch Time Tracker' %></title>
+  <title><%= typeof title !== 'undefined' ? title : 'Time Tracker' %></title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <nav class="nav">
-    <a href="/">Home</a>
-    <a href="/projects">Projects</a>
-    <a href="/timer">Timer</a>
-    <a href="/entries">Entries</a>
+    <a href="/" class="nav-brand">Time Tracker</a>
+    <div class="nav-links">
+      <a href="/">Dashboard</a>
+      <a href="/projects">Projects</a>
+      <a href="/timer">Timer</a>
+      <a href="/entries">Entries</a>
+    </div>
   </nav>
   <main class="main">
     <%- body %>
