@@ -3,8 +3,19 @@ const db = require('../db');
 
 const router = express.Router({ mergeParams: true });
 
+function getProjectsWithDefaultFirst(db) {
+  const noProject = db.prepare("SELECT * FROM projects WHERE name = 'No Project'").get();
+  const rest = db.prepare("SELECT * FROM projects WHERE name != 'No Project' ORDER BY name").all();
+  return noProject ? [noProject, ...rest] : rest;
+}
+
+function getNoProjectId(db) {
+  const row = db.prepare("SELECT id FROM projects WHERE name = 'No Project'").get();
+  return row ? row.id : null;
+}
+
 router.get('/', (req, res) => {
-  const projects = db.prepare('SELECT * FROM projects ORDER BY name').all();
+  const projects = getProjectsWithDefaultFirst(db);
   const tasks = db.prepare('SELECT id, project_id, name FROM tasks ORDER BY project_id, name').all();
   const current = db.prepare(
     'SELECT e.*, p.name AS project_name, t.name AS task_name FROM time_entries e LEFT JOIN projects p ON e.project_id = p.id LEFT JOIN tasks t ON e.task_id = t.id WHERE e.ended_at IS NULL LIMIT 1'
@@ -26,7 +37,8 @@ function stopCurrentEntry(db) {
 
 router.post('/start', (req, res) => {
   stopCurrentEntry(db);
-  const projectId = parseInt(req.body.project_id, 10);
+  let projectId = parseInt(req.body.project_id, 10);
+  if (!projectId) projectId = getNoProjectId(db);
   const taskId = req.body.task_id ? parseInt(req.body.task_id, 10) : null;
   const startedAt = new Date().toISOString();
   db.prepare('INSERT INTO time_entries (project_id, task_id, started_at) VALUES (?, ?, ?)').run(projectId, taskId, startedAt);

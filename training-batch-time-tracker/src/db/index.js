@@ -34,4 +34,9 @@ CREATE INDEX IF NOT EXISTS idx_time_entries_started_at ON time_entries(started_a
 
 db.exec(schema);
 
+const noProject = db.prepare("SELECT id FROM projects WHERE name = 'No Project'").get();
+if (!noProject) {
+  db.prepare("INSERT INTO projects (name) VALUES (?)").run('No Project');
+}
+
 module.exports = db;

@@ -3,9 +3,20 @@ const db = require('../db');
 
 const router = express.Router();
 
+function getNoProjectId() {
+  const row = db.prepare("SELECT id FROM projects WHERE name = 'No Project'").get();
+  return row ? row.id : null;
+}
+
+function getProjectsWithDefaultFirst() {
+  const noProject = db.prepare("SELECT * FROM projects WHERE name = 'No Project'").get();
+  const rest = db.prepare("SELECT * FROM projects WHERE name != 'No Project' ORDER BY name").all();
+  return noProject ? [noProject, ...rest] : rest;
+}
+
 router.get('/', (req, res) => {
-  const projects = db.prepare('SELECT * FROM projects ORDER BY name').all();
-  res.render('projects', { title: 'Projects', projects });
+  const projects = getProjectsWithDefaultFirst();
+  res.render('projects', { title: 'Projects', projects, noProjectId: getNoProjectId() });
 });
 
 router.post('/', (req, res) => {
@@ -31,6 +42,16 @@ router.post('/:id/tasks', (req, res) => {
     db.prepare('INSERT INTO tasks (project_id, name) VALUES (?, ?)').run(projectId, name);
   }
   res.redirect(`/projects/${projectId}/tasks`);
+});
+
+router.post('/tasks', (req, res) => {
+  let projectId = parseInt(req.body.project_id, 10);
+  if (!projectId) projectId = getNoProjectId();
+  const name = (req.body.task_name || '').trim();
+  if (name && projectId) {
+    db.prepare('INSERT INTO tasks (project_id, name) VALUES (?, ?)').run(projectId, name);
+  }
+  res.redirect('/projects');
 });
 
 module.exports = router;
